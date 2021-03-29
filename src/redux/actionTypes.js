@@ -1,0 +1,5 @@
+export const ADD_ROW = 'ADD_ROW'
+export const CHANGE_TAB = 'CHANGE_TAB'
+export const ROW_UP = 'ROW_UP'
+export const ROW_DOWN = 'ROW_DOWN'
+export const ROW_TOGGLE = 'ROW_TOGGLE'

@@ -6,17 +6,7 @@ import {
   CHANGE_TAB,
 } from './actionTypes'
 
-export const addRow = (content) => ({
-  type: ADD_ROW,
-  payload: {
-    content,
-  },
-})
-
-export const toggleRow = (id) => ({
-  type: ROW_TOGGLE,
-  payload: { id },
-})
+export const addRow = (content) => ({ type: ADD_ROW, payload: { content } })
 
 export const changeTab = (tab) => ({ type: CHANGE_TAB, payload: { tab } })
 

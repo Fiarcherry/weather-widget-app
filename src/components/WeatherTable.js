@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import WeatherRow from './WeatherRow'
 
 const mapStateToProps = (state) => {
+  console.log(state)
   const rows = state.table
   return { rows }
 }
@@ -17,9 +18,11 @@ const WeatherTable = ({ rows }) => (
       </tr>
     </thead>
     <tbody>
-      {rows.map((row, index) => {
-        return <WeatherRow key={index} row={row} />
-      })}
+      {rows && rows.length
+        ? rows.map((row, index) => {
+            return <WeatherRow key={index} row={row} />
+          })
+        : ''}
     </tbody>
   </table>
 )

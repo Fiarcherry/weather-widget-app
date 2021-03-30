@@ -11,13 +11,21 @@ const defaultState = [
 const row = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_ROW:
-      return [...state, action.name]
+      const { content } = action.payload
+      return [
+        ...state,
+        {
+          id: state.length,
+          name: content,
+          temperature: 0,
+          deleted: false,
+        },
+      ]
     case ROW_UP: {
-      let temp = state[action.id]
-      state[action.id] = state[action.id - 1]
-      state[action.id - 1] = temp
+      const { id } = action.payload
+      let temp = state[id]
 
-      return state
+      return [
     }
     case ROW_DOWN: {
       let temp = state[action.id]

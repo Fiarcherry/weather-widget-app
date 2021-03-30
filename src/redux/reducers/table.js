@@ -31,11 +31,14 @@ const row = (state = defaultState, action) => {
       ]
     }
     case ROW_DOWN: {
-      let temp = state[action.id]
-      state[action.id] = state[action.id + 1]
-      state[action.id + 1] = temp
+      const { row } = action.payload
+      const indexOfRow = state.indexOf(row)
 
-      return state
+      return state.map((row, index) => {
+        if (index === indexOfRow) return state[indexOfRow + 1]
+        else if (index === indexOfRow + 1) return state[indexOfRow]
+        else return row
+      })
     }
     case ROW_TOGGLE: {
       const { id } = action.payload

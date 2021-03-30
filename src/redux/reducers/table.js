@@ -1,11 +1,9 @@
 import { ADD_ROW, ROW_UP, ROW_DOWN, ROW_TOGGLE } from '../actionTypes'
 
-import { TAB_TYPES } from '../../constants/tabs'
-
 const defaultState = [
-  { id: 0, name: 'qwe', temperature: 12, status: TAB_TYPES.ACTIVE },
-  { id: 1, name: 'zxc', temperature: 13, status: TAB_TYPES.DELETED },
-  { id: 2, name: 'asd', temperature: 14, status: TAB_TYPES.ACTIVE },
+  { id: 0, name: 'qwe', temperature: 12, deleted: true },
+  { id: 1, name: 'zxc', temperature: 13, deleted: false },
+  { id: 2, name: 'asd', temperature: 14, deleted: true },
 ]
 
 const row = (state = defaultState, action) => {
@@ -26,6 +24,11 @@ const row = (state = defaultState, action) => {
       let temp = state[id]
 
       return [
+        ...state,
+        state.slice
+        (state[id] = state[id - 1]), 
+        (state[id - 1] = temp)
+      ]
     }
     case ROW_DOWN: {
       let temp = state[action.id]
@@ -35,12 +38,10 @@ const row = (state = defaultState, action) => {
       return state
     }
     case ROW_TOGGLE: {
-      console.log(state)
-      state[action.id].status === TAB_TYPES.ACTIVE
-        ? (state[action.id].status = TAB_TYPES.DELETED)
-        : (state[action.id].status = TAB_TYPES.ACTIVE)
-      console.log(state)
-      return state
+      const { id } = action.payload
+      return state.map((row) =>
+        row.id === id ? { ...row, deleted: !row.deleted } : row
+      )
     }
     default:
       return state

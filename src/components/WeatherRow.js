@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { TAB_TYPES } from '../constants/tabs'
 import { rowMoveUp, rowMoveDown, rowToggle } from '../redux/actions'
 import Button from './Button'
 
@@ -15,7 +14,7 @@ const WeatherRow = ({ row }) => {
       <td>
         <Button
           onClick={() => rowToggle(row.id)}
-          title={row.status === TAB_TYPES.ACTIVE ? 'Удалить' : 'Восстановить'}
+          title={row.deleted === false ? 'Удалить' : 'Восстановить'}
         />
       </td>
     </tr>

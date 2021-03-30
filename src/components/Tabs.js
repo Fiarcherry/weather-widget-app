@@ -26,7 +26,7 @@ const Tabs = ({ activeTab, changeTab }) => (
 )
 
 const mapStateToProps = (state) => {
-  return { activeTab: state.tabs.tab }
+  return { activeTab: state.tabs }
 }
 
 export default connect(mapStateToProps, { changeTab })(Tabs)

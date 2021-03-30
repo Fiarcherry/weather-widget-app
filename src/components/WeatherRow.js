@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { rowMoveUp, rowMoveDown, rowToggle } from '../redux/actions'
 import Button from './Button'
 
-const WeatherRow = ({ row }) => {
+const WeatherRow = ({ row, rowMoveUp, rowMoveDown, rowToggle }) => {
   return (
     <tr>
       <td>{row.name}</td>

@@ -20,15 +20,14 @@ const row = (state = defaultState, action) => {
         },
       ]
     case ROW_UP: {
-      const { id } = action.payload
-      let temp = state[id]
+      const { row } = action.payload
+      const indexOfRow = state.indexOf(row)
 
-      return [
-        ...state,
-        state.slice
-        (state[id] = state[id - 1]), 
-        (state[id - 1] = temp)
-      ]
+      return state.map((row, index) => {
+        if (index === indexOfRow) return state[indexOfRow - 1]
+        else if (index === indexOfRow - 1) return state[indexOfRow]
+        else return row
+      })
     }
     case ROW_DOWN: {
       const { row } = action.payload

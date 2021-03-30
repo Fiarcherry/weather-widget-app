@@ -20,7 +20,7 @@ export const toggleRow = (id) => ({
 
 export const changeTab = (tab) => ({ type: CHANGE_TAB, payload: { tab } })
 
-export const rowMoveUp = (id) => ({ type: ROW_UP, payload: { id } })
+export const rowMoveUp = (row) => ({ type: ROW_UP, payload: { row } })
 
 export const rowMoveDown = (row) => ({ type: ROW_DOWN, payload: { row } })
 

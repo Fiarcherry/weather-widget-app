@@ -8,7 +8,7 @@ const WeatherRow = ({ row, rowMoveUp, rowMoveDown, rowToggle }) => {
       <td>{row.name}</td>
       <td>{row.temperature}</td>
       <td>
-        <Button onClick={() => rowMoveUp(row.id)} title="Вверх" />
+        <Button onClick={() => rowMoveUp(row)} title="Вверх" />
         <Button onClick={() => rowMoveDown(row)} title="Вниз" />
       </td>
       <td>

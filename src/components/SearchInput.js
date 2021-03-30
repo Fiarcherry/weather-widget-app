@@ -1,14 +1,8 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { ADD_ROW } from '../redux/actionTypes'
+import { addRow } from '../redux/actions'
 import Button from './Button'
 import Input from './Input'
-
-const mapDispatchToProps = (dispatch) => ({
-  citySearch: (name) => {
-    dispatch({ type: ADD_ROW, name })
-  },
-})
 
 class SearchInput extends Component {
   constructor(props) {
@@ -18,7 +12,7 @@ class SearchInput extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.submitCitySearch = this.submitCitySearch.bind(this)
+    this.handleSubmitCitySearch = this.handleSubmitCitySearch.bind(this)
   }
 
   handleChange(event) {
@@ -27,9 +21,9 @@ class SearchInput extends Component {
     })
   }
 
-  submitCitySearch() {
+  handleSubmitCitySearch() {
     console.log('submit')
-    this.props.citySearch(this.state.input)
+    this.props.addRow(this.state.input)
     this.setState({ input: '' })
   }
 
@@ -42,10 +36,10 @@ class SearchInput extends Component {
           value={this.state.input}
           onChange={this.handleChange}
         />
-        <Button onClick={this.submitCitySearch} title="Поиск" />
+        <Button onClick={this.handleSubmitCitySearch} title="Поиск" />
       </div>
     )
   }
 }
 
-export default connect(null, mapDispatchToProps)(SearchInput)
+export default connect(null, { addRow })(SearchInput)

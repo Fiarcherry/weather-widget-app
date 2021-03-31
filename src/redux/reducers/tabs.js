@@ -1,9 +1,9 @@
 import { CHANGE_TAB } from '../actionTypes'
 import { TAB_TYPES } from '../../constants/tabs'
 
-const initialState = TAB_TYPES.ALL
+const defaultState = TAB_TYPES.ALL
 
-const tabs = (state = initialState, action) => {
+const tabs = (state = defaultState, action) => {
   switch (action.type) {
     case CHANGE_TAB: {
       const { tab } = action.payload

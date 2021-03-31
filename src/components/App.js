@@ -1,9 +1,9 @@
 import React from 'react'
-import SearchInput from './components/SearchInput'
-import Tabs from './components/Tabs'
-import WeatherTable from './components/WeatherTable'
+import SearchInput from './SearchInput'
+import Tabs from './Tabs'
+import WeatherTable from './WeatherTable'
 import { Switch, Route } from 'react-router-dom'
-import { TAB_TYPES } from './constants/tabs'
+import { TAB_TYPES } from '../constants/tabs'
 import './App.css'
 
 function App() {

@@ -11,10 +11,22 @@ export const addRow = (city) => ({
   payload: { city },
 })
 
-export const changeTab = (tab) => ({ type: CHANGE_TAB, payload: { tab } })
+export const changeTab = (tab) => ({
+  type: CHANGE_TAB,
+  payload: { tab },
+})
 
-export const rowMoveUp = (row) => ({ type: ROW_UP, payload: { row } })
+export const rowMoveUp = (row) => ({
+  type: ROW_UP,
+  payload: { row },
+})
 
-export const rowMoveDown = (row) => ({ type: ROW_DOWN, payload: { row } })
+export const rowMoveDown = (row) => ({
+  type: ROW_DOWN,
+  payload: { row },
+})
 
-export const rowToggle = (id) => ({ type: ROW_TOGGLE, payload: { id } })
+export const rowToggle = (id) => ({
+  type: ROW_TOGGLE,
+  payload: { id },
+})

@@ -37,7 +37,7 @@ const WeatherRow = ({
       <td>
         <Button
           onClick={() => rowToggle(row.id)}
-          title={row.deleted === false ? 'Удалить' : 'Восстановить'}
+          title={row.active === false ? 'Восстановить' : 'Удалить'}
         />
       </td>
     </tr>

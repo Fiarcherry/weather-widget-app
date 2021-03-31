@@ -2,36 +2,27 @@ import React from 'react'
 import SearchInput from './components/SearchInput'
 import Tabs from './components/Tabs'
 import WeatherTable from './components/WeatherTable'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+import { TAB_TYPES } from './constants/tabs'
 import './App.css'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/all">All</Link>
-            </li>
-            <li>
-              <Link to="/active">Active</Link>
-            </li>
-            <li>
-              <Link to="/deleted">Deleted</Link>
-            </li>
-          </ul>
-        </nav>
         <SearchInput />
         <Switch>
+          <Route path="/">
+            <Tabs activeTab={TAB_TYPES.ALL} />
+          </Route>
           <Route path="/all">
-            <Tabs activeTab="all" />
+            <Tabs activeTab={TAB_TYPES.ALL} />
           </Route>
           <Route path="/active">
-            <Tabs activeTab="active" />
+            <Tabs activeTab={TAB_TYPES.ACTIVE} />
           </Route>
           <Route path="/deleted">
-            <Tabs activeTab="deleted" />
+            <Tabs activeTab={TAB_TYPES.DELETED} />
           </Route>
         </Switch>
         <WeatherTable />

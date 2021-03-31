@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { addRow } from '../redux/actions'
+import { getWeatherByCityName } from '../api/actions'
 import Button from './Button'
 import Input from './Input'
 
@@ -23,7 +23,7 @@ class SearchInput extends Component {
 
   handleSubmitCitySearch() {
     console.log('submit')
-    this.props.addRow(this.state.input)
+    this.props.getWeatherByCityName(this.state.input)
     this.setState({ input: '' })
   }
 
@@ -42,4 +42,4 @@ class SearchInput extends Component {
   }
 }
 
-export default connect(null, { addRow })(SearchInput)
+export default connect(null, { getWeatherByCityName })(SearchInput)

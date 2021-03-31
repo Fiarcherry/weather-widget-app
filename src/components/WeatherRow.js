@@ -1,15 +1,38 @@
 import { connect } from 'react-redux'
 import { rowMoveUp, rowMoveDown, rowToggle } from '../redux/actions'
+import { getRowsByTab } from '../redux/selectors'
 import Button from './Button'
 
-const WeatherRow = ({ row, rowMoveUp, rowMoveDown, rowToggle }) => {
+const mapStateToProps = (state) => {
+  const { table, tabs } = state
+  const rows = getRowsByTab(table, tabs)
+  const rowsLength = rows.length
+  return { rowsLength }
+}
+
+const WeatherRow = ({
+  row,
+  index,
+  rowsLength,
+  rowMoveUp,
+  rowMoveDown,
+  rowToggle,
+}) => {
   return (
     <tr>
       <td>{row.name}</td>
-      <td>{row.temperature}</td>
+      <td>{row.temp}</td>
       <td>
-        <Button onClick={() => rowMoveUp(row)} title="Вверх" />
-        <Button onClick={() => rowMoveDown(row)} title="Вниз" />
+        <Button
+          onClick={() => rowMoveUp(row)}
+          title="Вверх"
+          isDisabled={index === 0 ? true : false}
+        />
+        <Button
+          onClick={() => rowMoveDown(row)}
+          title="Вниз"
+          isDisabled={index === rowsLength - 1 ? true : false}
+        />
       </td>
       <td>
         <Button
@@ -21,4 +44,6 @@ const WeatherRow = ({ row, rowMoveUp, rowMoveDown, rowToggle }) => {
   )
 }
 
-export default connect(null, { rowMoveUp, rowMoveDown, rowToggle })(WeatherRow)
+export default connect(mapStateToProps, { rowMoveUp, rowMoveDown, rowToggle })(
+  WeatherRow
+)

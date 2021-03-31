@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
+import { getRowsByTab } from '../redux/selectors'
 import WeatherRow from './WeatherRow'
 
 const mapStateToProps = (state) => {
-  console.log(state)
-  const rows = state.table
+  const { table, tabs } = state
+  const rows = getRowsByTab(table, tabs)
   return { rows }
 }
 
@@ -20,7 +21,7 @@ const WeatherTable = ({ rows }) => (
     <tbody>
       {rows && rows.length
         ? rows.map((row, index) => {
-            return <WeatherRow key={index} row={row} />
+            return <WeatherRow key={row.id} index={index} row={row} />
           })
         : ''}
     </tbody>

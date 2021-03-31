@@ -1,21 +1,21 @@
 import { ADD_ROW, ROW_UP, ROW_DOWN, ROW_TOGGLE } from '../actionTypes'
 
 const defaultState = [
-  { id: 0, name: 'qwe', temperature: 12, deleted: true },
-  { id: 1, name: 'zxc', temperature: 13, deleted: false },
-  { id: 2, name: 'asd', temperature: 14, deleted: true },
+  { id: 0, name: 'qwe', temp: 12, deleted: true },
+  { id: 1, name: 'zxc', temp: 13, deleted: false },
+  { id: 2, name: 'asd', temp: 14, deleted: true },
 ]
 
 const row = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_ROW:
-      const { content } = action.payload
+      const { city } = action.payload
       return [
         ...state,
         {
           id: state.length,
-          name: content,
-          temperature: 0,
+          name: city.name,
+          temp: city.temp,
           deleted: false,
         },
       ]

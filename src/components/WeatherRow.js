@@ -1,9 +1,12 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import { rowMoveUp, rowMoveDown } from '../redux/actions'
+import { updateRow, rowMoveUp, rowMoveDown } from '../redux/actions'
 import { getRowsByTab } from '../redux/selectors'
-import Button from './Button'
 import ConfirmDialog from './ConfirmDialog'
+
+import Button from '@material-ui/core/Button'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import ChangeDialog from './ChangeDialog'
 
 const mapStateToProps = (state) => {
   const rows = getRowsByTab(state)
@@ -13,29 +16,41 @@ const mapStateToProps = (state) => {
 
 const WeatherRow = ({ row, index, rowsLength, rowMoveUp, rowMoveDown }) => {
   return (
-    <tr>
-      <td>{row.name}</td>
-      <td>{row.temp}</td>
-      <td>
+    <TableRow hover key={row.name}>
+      <TableCell component="th" scope="row">
+        {row.name}
+      </TableCell>
+      <TableCell align="center">
+        <ChangeDialog row={row} />
+      </TableCell>
+      <TableCell align="center">{row.temp}</TableCell>
+      <TableCell align="center">
         <Button
           onClick={() => rowMoveUp(row)}
-          title="Вверх"
-          isDisabled={index === 0 ? true : false}
-        />
+          disabled={index === 0 ? true : false}
+          color="primary"
+          variant="outlined"
+        >
+          Вверх
+        </Button>
         <Button
           onClick={() => rowMoveDown(row)}
-          title="Вниз"
-          isDisabled={index === rowsLength - 1 ? true : false}
-        />
-      </td>
-      <td>
+          disabled={index === rowsLength - 1 ? true : false}
+          color="primary"
+          variant="outlined"
+        >
+          Вниз
+        </Button>
+      </TableCell>
+      <TableCell align="center">
         <ConfirmDialog row={row} />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   )
 }
 
 export default connect(mapStateToProps, {
+  updateRow,
   rowMoveUp,
   rowMoveDown,
 })(WeatherRow)

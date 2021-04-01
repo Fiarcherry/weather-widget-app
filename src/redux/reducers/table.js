@@ -1,5 +1,12 @@
-import { ADD_ROW, ROW_UP, ROW_DOWN, ROW_TOGGLE } from '../actionTypes'
+import {
+  ADD_ROW,
+  UPDATE_ROW,
+  ROW_UP,
+  ROW_DOWN,
+  ROW_TOGGLE,
+} from '../actionTypes'
 
+//Потом убрать
 const defaultState = [
   { id: 0, name: 'qwe', temp: 12, active: true },
   { id: 1, name: 'zxc', temp: 13, active: false },
@@ -8,8 +15,9 @@ const defaultState = [
 
 const row = (state = defaultState, action) => {
   switch (action.type) {
-    case ADD_ROW:
+    case ADD_ROW: {
       const { city } = action.payload
+
       return [
         ...state,
         {
@@ -19,6 +27,21 @@ const row = (state = defaultState, action) => {
           active: true,
         },
       ]
+    }
+    //То же самое, что и добавление
+    case UPDATE_ROW: {
+      const { city } = action.payload
+
+      return [
+        ...state,
+        {
+          id: state.length,
+          name: city.name,
+          temp: city.temp,
+          active: true,
+        },
+      ]
+    }
     case ROW_UP: {
       const { row } = action.payload
       const indexOfRow = state.indexOf(row)

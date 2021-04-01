@@ -1,5 +1,6 @@
 import {
   ADD_ROW,
+  UPDATE_ROW,
   ROW_UP,
   ROW_DOWN,
   ROW_TOGGLE,
@@ -8,6 +9,11 @@ import {
 
 export const addRow = (city) => ({
   type: ADD_ROW,
+  payload: { city },
+})
+
+export const updateRow = (city) => ({
+  type: UPDATE_ROW,
   payload: { city },
 })
 

@@ -1,4 +1,5 @@
 export const ADD_ROW = 'ADD_ROW'
+export const UPDATE_ROW = 'UPDATE_ROW'
 export const CHANGE_TAB = 'CHANGE_TAB'
 export const ROW_UP = 'ROW_UP'
 export const ROW_DOWN = 'ROW_DOWN'

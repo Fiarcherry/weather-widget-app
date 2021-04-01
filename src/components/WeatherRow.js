@@ -1,7 +1,9 @@
+import React from 'react'
 import { connect } from 'react-redux'
-import { rowMoveUp, rowMoveDown, rowToggle } from '../redux/actions'
+import { rowMoveUp, rowMoveDown } from '../redux/actions'
 import { getRowsByTab } from '../redux/selectors'
 import Button from './Button'
+import ConfirmDialog from './ConfirmDialog'
 
 const mapStateToProps = (state) => {
   const rows = getRowsByTab(state)
@@ -9,14 +11,7 @@ const mapStateToProps = (state) => {
   return { rowsLength }
 }
 
-const WeatherRow = ({
-  row,
-  index,
-  rowsLength,
-  rowMoveUp,
-  rowMoveDown,
-  rowToggle,
-}) => {
+const WeatherRow = ({ row, index, rowsLength, rowMoveUp, rowMoveDown }) => {
   return (
     <tr>
       <td>{row.name}</td>
@@ -34,15 +29,13 @@ const WeatherRow = ({
         />
       </td>
       <td>
-        <Button
-          onClick={() => rowToggle(row.id)}
-          title={row.active === false ? 'Восстановить' : 'Удалить'}
-        />
+        <ConfirmDialog row={row} />
       </td>
     </tr>
   )
 }
 
-export default connect(mapStateToProps, { rowMoveUp, rowMoveDown, rowToggle })(
-  WeatherRow
-)
+export default connect(mapStateToProps, {
+  rowMoveUp,
+  rowMoveDown,
+})(WeatherRow)

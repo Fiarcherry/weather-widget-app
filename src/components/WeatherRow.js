@@ -4,8 +4,7 @@ import { getRowsByTab } from '../redux/selectors'
 import Button from './Button'
 
 const mapStateToProps = (state) => {
-  const { table, tabs } = state
-  const rows = getRowsByTab(table, tabs)
+  const rows = getRowsByTab(state)
   const rowsLength = rows.length
   return { rowsLength }
 }

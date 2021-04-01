@@ -7,14 +7,14 @@ import {
   CHANGE_TAB,
 } from './actionTypes'
 
-export const addRow = (city) => ({
+export const addRow = (row) => ({
   type: ADD_ROW,
-  payload: { city },
+  payload: { row },
 })
 
-export const updateRow = (city) => ({
+export const updateRow = (newRow) => ({
   type: UPDATE_ROW,
-  payload: { city },
+  payload: { newRow },
 })
 
 export const changeTab = (tab) => ({

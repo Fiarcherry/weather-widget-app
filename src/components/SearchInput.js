@@ -1,8 +1,7 @@
+import { Button, Input } from '@material-ui/core'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { getWeatherByCityName } from '../api/actions'
-import Button from './Button'
-import Input from './Input'
 
 class SearchInput extends Component {
   constructor(props) {
@@ -30,13 +29,19 @@ class SearchInput extends Component {
   render() {
     return (
       <div>
-        <h2>Type in a new Message:</h2>
+        <h2>Погода</h2>
         <Input
           placeholder="Название города"
           value={this.state.input}
           onChange={this.handleChange}
         />
-        <Button onClick={this.handleSubmitCitySearch} title="Поиск" />
+        <Button
+          onClick={this.handleSubmitCitySearch}
+          variant="outlined"
+          color="primary"
+        >
+          Поиск
+        </Button>
       </div>
     )
   }

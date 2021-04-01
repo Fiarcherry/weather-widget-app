@@ -2,29 +2,52 @@ import { connect } from 'react-redux'
 import { getRowsByTab } from '../redux/selectors'
 import WeatherRow from './WeatherRow'
 
+import { makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+})
+
 const mapStateToProps = (state) => {
   const rows = getRowsByTab(state)
   return { rows }
 }
 
-const WeatherTable = ({ rows }) => (
-  <table>
-    <thead>
-      <tr>
-        <th>Название</th>
-        <th>Температура</th>
-        <th>Позиция</th>
-        <th>Статус</th>
-      </tr>
-    </thead>
-    <tbody>
-      {rows && rows.length
-        ? rows.map((row, index) => {
-            return <WeatherRow key={row.id} index={index} row={row} />
-          })
-        : ''}
-    </tbody>
-  </table>
-)
+const WeatherTable = ({ rows }) => {
+  const classes = useStyles()
 
+  return (
+    <div>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} size="small" aria-label="Погода">
+          <TableHead>
+            <TableRow>
+              <TableCell>Название</TableCell>
+              <TableCell align="center">Изменить</TableCell>
+              <TableCell align="center">Температура</TableCell>
+              <TableCell align="center">Позиция</TableCell>
+              <TableCell align="center">Статус</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows && rows.length
+              ? rows.map((row, index) => (
+                  <WeatherRow key={row.id} index={index} row={row} />
+                ))
+              : ''}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  )
+}
 export default connect(mapStateToProps)(WeatherTable)

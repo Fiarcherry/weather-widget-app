@@ -3,8 +3,7 @@ import { getRowsByTab } from '../redux/selectors'
 import WeatherRow from './WeatherRow'
 
 const mapStateToProps = (state) => {
-  const { table, tabs } = state
-  const rows = getRowsByTab(table, tabs)
+  const rows = getRowsByTab(state)
   return { rows }
 }
 

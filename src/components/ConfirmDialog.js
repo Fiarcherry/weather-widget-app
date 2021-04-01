@@ -8,11 +8,8 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 const ConfirmDialog = ({ row, rowToggle }) => {
-  console.log(row)
   const [open, setOpen] = useState(false)
-  console.log(open)
   const handleOpen = () => {
-    console.log('test')
     setOpen(true)
   }
   const handleCancel = () => setOpen(false)

@@ -21,7 +21,6 @@ class SearchInput extends Component {
   }
 
   handleSubmitCitySearch() {
-    console.log('submit')
     this.props.getWeatherByCityName(this.state.input)
     this.setState({ input: '' })
   }

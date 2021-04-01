@@ -1,3 +1,5 @@
+//Сейчас везде используется material ui
+
 const Input = ({ onChange, value, placeholder }) => (
   <input onChange={onChange} value={value} placeholder={placeholder} />
 )

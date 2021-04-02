@@ -6,21 +6,18 @@ import { Link } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import { useStyles } from '../styles'
 
 const mapStateToProps = (state) => {
   return { activeTab: state.tabs }
 }
 
 const FliterTabs = ({ activeTab, changeTab }) => {
-  const classes = useStyles()
-
   const handleChange = (event, value) => {
     changeTab(value)
   }
 
   return (
-    <Paper square className={classes.width}>
+    <Paper square>
       <Tabs
         value={activeTab}
         indicatorColor="primary"

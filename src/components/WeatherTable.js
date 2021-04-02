@@ -2,20 +2,13 @@ import { connect } from 'react-redux'
 import { getRowsByTab } from '../redux/selectors'
 import WeatherRow from './WeatherRow'
 
-import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-})
+import useStyles from '../styles'
 
 const mapStateToProps = (state) => {
   const rows = getRowsByTab(state)
@@ -27,7 +20,7 @@ const WeatherTable = ({ rows }) => {
 
   return (
     <div>
-      <TableContainer component={Paper}>
+      <TableContainer>
         <Table className={classes.table} size="small" aria-label="Погода">
           <TableHead>
             <TableRow>

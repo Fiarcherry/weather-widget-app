@@ -1,49 +1,41 @@
 import { Button, Input } from '@material-ui/core'
-import { Component } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { getWeatherByCityName } from '../api/actions'
+import useStyles from '../styles'
 
-class SearchInput extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      input: '',
-    }
+const SearchInput = ({ getWeatherByCityName }) => {
+  const classes = useStyles()
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmitCitySearch = this.handleSubmitCitySearch.bind(this)
+  const [value, setValue] = useState('')
+
+  const handleChange = (event) => {
+    setValue(event.target.value)
   }
 
-  handleChange(event) {
-    this.setState({
-      input: event.target.value,
-    })
+  const handleSubmitCitySearch = () => {
+    getWeatherByCityName(value)
+    setValue('')
   }
-
-  handleSubmitCitySearch() {
-    this.props.getWeatherByCityName(this.state.input)
-    this.setState({ input: '' })
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Погода</h2>
-        <Input
-          placeholder="Название города"
-          value={this.state.input}
-          onChange={this.handleChange}
-        />
-        <Button
-          onClick={this.handleSubmitCitySearch}
-          variant="outlined"
-          color="primary"
-        >
-          Поиск
-        </Button>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h2>Погода</h2>
+      <Input
+        className={classes.input}
+        placeholder="Название города"
+        value={value}
+        onChange={handleChange}
+      />
+      <Button
+        className={classes.margin}
+        onClick={handleSubmitCitySearch}
+        variant="outlined"
+        color="primary"
+      >
+        Поиск
+      </Button>
+    </div>
+  )
 }
 
 export default connect(null, { getWeatherByCityName })(SearchInput)

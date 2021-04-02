@@ -10,6 +10,13 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(3),
   },
+  errorMessage: {
+    color: theme.palette.error.main,
+  },
+  emptyTableData: {
+    color: '#BBB',
+    fontSize: 64,
+  },
 }))
 
 export default useStyles

@@ -32,11 +32,21 @@ const WeatherTable = ({ rows }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows.length
-              ? rows.map((row, index) => (
-                  <WeatherRow key={row.id} index={index} row={row} />
-                ))
-              : ''}
+            {rows && rows.length ? (
+              rows.map((row, index) => (
+                <WeatherRow key={row.id} index={index} row={row} />
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  align="center"
+                  colSpan={5}
+                  className={classes.emptyTableData}
+                >
+                  Данных нет
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

@@ -6,14 +6,7 @@ import {
   ROW_TOGGLE,
 } from '../actionTypes'
 
-//Потом убрать
-const defaultState = [
-  { id: 0, name: 'qwe', temp: 12, active: true },
-  { id: 1, name: 'zxc', temp: 13, active: false },
-  { id: 2, name: 'asd', temp: 14, active: true },
-]
-
-const row = (state = defaultState, action) => {
+const row = (state = [], action) => {
   switch (action.type) {
     case ADD_ROW: {
       const { row } = action.payload

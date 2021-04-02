@@ -5,16 +5,34 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
+import { updateRow } from '../redux/actions'
+import { connect } from 'react-redux'
 
-const ChangeDialog = () => {
+const ChangeDialog = ({ row, updateRow }) => {
+  const initialCityState = {
+    name: row.name,
+    temp: row.temp,
+  }
   const [open, setOpen] = useState(false)
+  const [{ name: cityName, temp }, setCity] = useState(initialCityState)
+  const [valid, setValid] = useState(true)
 
   const handleRowClick = () => setOpen(true)
-  const handleCancel = () => setOpen(false)
-  const handleOk = (row) => {
-    console.log(row)
-    //Изменить информацию о температуре города
+  const handleCancel = () => {
+    setCity(initialCityState)
     setOpen(false)
+  }
+  const handleOk = () => {
+    const city = { id: row.id, name: cityName, temp }
+    console.log(city)
+    updateRow(city)
+    setOpen(false)
+  }
+
+  function handleInputChange(event) {
+    let { name, value } = event.target
+    setCity((prevState) => ({ ...prevState, [name]: value }))
+    setValid(!(value === ''))
   }
 
   return (
@@ -32,25 +50,31 @@ const ChangeDialog = () => {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            name="name"
             label="Название"
             type="text"
             fullWidth
+            value={cityName}
+            onChange={handleInputChange}
+            {...(cityName === '' ? { error: true } : {})}
           />
           <TextField
-            autoFocus
             margin="dense"
-            id="temp"
+            name="temp"
             label="Температура"
             type="number"
             fullWidth
+            value={temp}
+            onChange={handleInputChange}
+            {...(temp === '' ? { error: true } : {})}
+            required
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel} color="primary">
             Отмена
           </Button>
-          <Button onClick={handleOk} color="primary" autoFocus>
+          <Button onClick={handleOk} color="primary" disabled={!valid}>
             Сохранить
           </Button>
         </DialogActions>
@@ -59,4 +83,4 @@ const ChangeDialog = () => {
   )
 }
 
-export default ChangeDialog
+export default connect(null, { updateRow })(ChangeDialog)

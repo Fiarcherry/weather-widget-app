@@ -16,31 +16,25 @@ const defaultState = [
 const row = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_ROW: {
-      const { city } = action.payload
+      const { row } = action.payload
 
       return [
         ...state,
         {
           id: state.length,
-          name: city.name,
-          temp: city.temp,
+          name: row.name,
+          temp: row.temp,
           active: true,
         },
       ]
     }
-    //То же самое, что и добавление
     case UPDATE_ROW: {
-      const { city } = action.payload
-
-      return [
-        ...state,
-        {
-          id: state.length,
-          name: city.name,
-          temp: city.temp,
-          active: true,
-        },
-      ]
+      const { newRow } = action.payload
+      return state.map((row) =>
+        row.id === newRow.id
+          ? { ...row, name: newRow.name, temp: newRow.temp }
+          : row
+      )
     }
     case ROW_UP: {
       const { row } = action.payload

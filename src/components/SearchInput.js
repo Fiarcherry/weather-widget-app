@@ -1,4 +1,6 @@
-import { Button, Input } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Input from '@material-ui/core/Input'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { addRow } from '../redux/actions'
@@ -12,6 +14,7 @@ const SearchInput = ({ addRow }) => {
 
   const [value, setValue] = useState('')
   const [error, setError] = useState('')
+  const [fetching, setFetching] = useState(false)
 
   const handleChange = (event) => {
     setError('')
@@ -19,6 +22,8 @@ const SearchInput = ({ addRow }) => {
   }
 
   async function handleSubmitCitySearch() {
+    setFetching(true)
+
     const URL = `${API_BASE_URL}weather?q=${value}&appid=${API_KEY}&units=${API_UNITS}&lang=${API_LANG}`
 
     await axios
@@ -31,6 +36,7 @@ const SearchInput = ({ addRow }) => {
       .catch((error) => {
         setError(errorHandler(error.response.data.message))
       })
+    setFetching(false)
   }
   return (
     <div>
@@ -50,6 +56,7 @@ const SearchInput = ({ addRow }) => {
         Поиск
       </Button>
       <br />
+      {fetching ? <CircularProgress /> : ''}
       <p className={classes.errorMessage}>{error}</p>
     </div>
   )

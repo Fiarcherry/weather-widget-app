@@ -1,13 +1,15 @@
-import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Input from '@material-ui/core/Input'
 import { useState } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import { addRow } from '../redux/actions'
 import { API_BASE_URL, API_KEY, API_LANG, API_UNITS } from '../constants/api'
-import useStyles from '../styles'
-import axios from 'axios'
 import errorHandler from '../api/errorTypes'
+
+import Button from './Button'
+import TextInput from './TextInput'
+
+import CircularProgress from '@material-ui/core/CircularProgress'
+import useStyles from '../styles'
 
 const SearchInput = ({ addRow }) => {
   const classes = useStyles()
@@ -38,23 +40,23 @@ const SearchInput = ({ addRow }) => {
       })
     setFetching(false)
   }
+
   return (
     <div>
       <h2>Погода</h2>
-      <Input
+      <TextInput
+        name="cityName"
+        label="Название города"
+        type="text"
         className={classes.input}
-        placeholder="Название города"
         value={value}
         onChange={handleChange}
       />
       <Button
         className={classes.margin}
         onClick={handleSubmitCitySearch}
-        variant="outlined"
-        color="primary"
-      >
-        Поиск
-      </Button>
+        title="Поиск"
+      />
       <br />
       {fetching ? <CircularProgress /> : ''}
       <p className={classes.errorMessage}>{error}</p>

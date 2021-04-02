@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { changeTab } from '../redux/actions'
 import { TAB_TYPES } from '../constants/tabs'
-import { Link } from 'react-router-dom'
+
+import Tab from './Tab'
 
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
 
 const mapStateToProps = (state) => {
   return { activeTab: state.tabs }

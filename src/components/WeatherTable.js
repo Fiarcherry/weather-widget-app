@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { getRowsByTab } from '../redux/selectors'
+
 import WeatherRow from './WeatherRow'
 
 import Table from '@material-ui/core/Table'
@@ -25,10 +26,8 @@ const WeatherTable = ({ rows }) => {
           <TableHead>
             <TableRow>
               <TableCell>Название</TableCell>
-              <TableCell align="center">Изменить</TableCell>
               <TableCell align="center">Температура</TableCell>
-              <TableCell align="center">Позиция</TableCell>
-              <TableCell align="center">Статус</TableCell>
+              <TableCell colSpan={3}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

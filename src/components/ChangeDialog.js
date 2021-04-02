@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import Button from '@material-ui/core/Button'
+import { connect } from 'react-redux'
+import { updateRow } from '../redux/actions'
+
+import Button from './Button'
+import TextInput from './TextInput'
+
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import TextField from '@material-ui/core/TextField'
-import { updateRow } from '../redux/actions'
-import { connect } from 'react-redux'
 
 const ChangeDialog = ({ row, updateRow }) => {
   const initialCityState = {
@@ -37,9 +39,7 @@ const ChangeDialog = ({ row, updateRow }) => {
 
   return (
     <div>
-      <Button onClick={handleRowClick} variant="outlined" color="primary">
-        Изменить
-      </Button>
+      <Button onClick={handleRowClick} title="Изменить" />
       <Dialog
         open={open}
         onClose={handleCancel}
@@ -47,36 +47,32 @@ const ChangeDialog = ({ row, updateRow }) => {
       >
         <DialogTitle id="form-dialog-title">Температура в городе</DialogTitle>
         <DialogContent>
-          <TextField
+          <TextInput
             autoFocus
-            margin="dense"
             name="name"
             label="Название"
             type="text"
-            fullWidth
             value={cityName}
             onChange={handleInputChange}
             {...(cityName === '' ? { error: true } : {})}
           />
-          <TextField
-            margin="dense"
+          <TextInput
             name="temp"
             label="Температура"
             type="number"
-            fullWidth
             value={temp}
             onChange={handleInputChange}
             {...(temp === '' ? { error: true } : {})}
-            required
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} color="primary">
-            Отмена
-          </Button>
-          <Button onClick={handleOk} color="primary" disabled={!valid}>
-            Сохранить
-          </Button>
+          <Button onClick={handleCancel} title="Отмена" variant="text" />
+          <Button
+            onClick={handleOk}
+            title="Сохранить"
+            variant="text"
+            disabled={!valid}
+          />
         </DialogActions>
       </Dialog>
     </div>

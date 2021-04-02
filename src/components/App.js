@@ -1,34 +1,52 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import SearchInput from './SearchInput'
-import Tabs from './Tabs'
+import FilterTabs from './FilterTabs'
 import WeatherTable from './WeatherTable'
 import { Switch, Route } from 'react-router-dom'
-import { TAB_TYPES } from '../constants/tabs'
 import './App.css'
+import { connect } from 'react-redux'
+import { changeTab } from '../redux/actions'
+import { TAB_TYPES } from '../constants/tabs'
 
-function App() {
+function App({ changeTab }) {
   return (
     <div className="App">
       <header className="App-header">
         <SearchInput />
-        <Switch>
-          <Route path="/">
-            <Tabs activeTab={TAB_TYPES.ALL} />
-          </Route>
-          <Route path="/all">
-            <Tabs activeTab={TAB_TYPES.ALL} />
-          </Route>
-          <Route path="/active">
-            <Tabs activeTab={TAB_TYPES.ACTIVE} />
-          </Route>
-          <Route path="/deleted">
-            <Tabs activeTab={TAB_TYPES.DELETED} />
-          </Route>
-        </Switch>
+        <br />
+        <Route
+          path="/"
+          render={() => (
+            <Fragment>
+              <FilterTabs />
+              <Switch>
+                <Route
+                  path="/all"
+                  render={() => {
+                    changeTab(TAB_TYPES.ALL)
+                  }}
+                />
+                <Route
+                  path="/active"
+                  render={() => {
+                    changeTab(TAB_TYPES.ACTIVE)
+                  }}
+                />
+                <Route
+                  path="/deleted"
+                  render={() => {
+                    changeTab(TAB_TYPES.DELETED)
+                  }}
+                />
+              </Switch>
+            </Fragment>
+          )}
+        />
+        <br />
         <WeatherTable />
       </header>
     </div>
   )
 }
 
-export default App
+export default connect(null, { changeTab })(App)

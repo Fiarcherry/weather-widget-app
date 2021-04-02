@@ -29,10 +29,10 @@ const ChangeDialog = ({ row, updateRow }) => {
     setOpen(false)
   }
 
-  function handleInputChange(event) {
+  const handleInputChange = (event) => {
     let { name, value } = event.target
     setCity((prevState) => ({ ...prevState, [name]: value }))
-    setValid(!(value === ''))
+    setValid(!(cityName === '' || temp === '' || value === ''))
   }
 
   return (

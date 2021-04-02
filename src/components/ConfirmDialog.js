@@ -9,8 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 const ConfirmDialog = ({ row, rowToggle }) => {
   const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    setOpen(true)
+  const handleOpen = (id, active) => {
+    active ? setOpen(true) : rowToggle(id)
   }
   const handleCancel = () => setOpen(false)
   const handleOk = (id) => {
@@ -20,7 +20,11 @@ const ConfirmDialog = ({ row, rowToggle }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="outlined" color="primary">
+      <Button
+        onClick={() => handleOpen(row.id, row.active)}
+        variant="outlined"
+        color="primary"
+      >
         {row.active ? 'Удалить' : 'Восстановить'}
       </Button>
       <Dialog

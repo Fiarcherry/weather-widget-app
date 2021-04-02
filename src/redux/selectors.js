@@ -12,8 +12,3 @@ export const getRowsByTab = (state) => {
       return table
   }
 }
-
-export const getRows = (state) => {
-  const { table } = state
-  return table
-}

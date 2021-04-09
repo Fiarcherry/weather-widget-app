@@ -24,11 +24,15 @@ const WeatherTable = ({ rows }) => {
       <TableContainer>
         <Table className={classes.table} size="small" aria-label="Погода">
           <TableHead>
-            <TableRow>
-              <TableCell>Название</TableCell>
-              <TableCell align="center">Температура</TableCell>
-              <TableCell colSpan={3}></TableCell>
-            </TableRow>
+            {rows && rows.length ? (
+              <TableRow>
+                <TableCell>Название</TableCell>
+                <TableCell align="center">Температура</TableCell>
+                <TableCell colSpan={3}></TableCell>
+              </TableRow>
+            ) : (
+              ''
+            )}
           </TableHead>
           <TableBody>
             {rows && rows.length ? (

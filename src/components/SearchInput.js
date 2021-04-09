@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import { addRow } from '../redux/actions'
-import { API_BASE_URL, API_KEY, API_LANG, API_UNITS } from '../constants/api'
-import errorHandler from '../api/errorTypes'
+import { getWeatherByCityName } from '../api/actions'
 
 import Button from './Button'
 import TextInput from './TextInput'
@@ -11,7 +8,7 @@ import TextInput from './TextInput'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import useStyles from '../styles'
 
-const SearchInput = ({ addRow }) => {
+const SearchInput = ({ getWeatherByCityName }) => {
   const classes = useStyles()
 
   const [value, setValue] = useState('')
@@ -23,22 +20,8 @@ const SearchInput = ({ addRow }) => {
     setValue(event.target.value)
   }
 
-  async function handleSubmitCitySearch() {
-    setFetching(true)
-
-    const URL = `${API_BASE_URL}weather?q=${value}&appid=${API_KEY}&units=${API_UNITS}&lang=${API_LANG}`
-
-    await axios
-      .get(URL)
-      .then((res) => {
-        const city = { name: res.data.name, temp: res.data.main.temp }
-        addRow(city)
-        setValue('')
-      })
-      .catch((error) => {
-        setError(errorHandler(error.response.data.message))
-      })
-    setFetching(false)
+  const handleSubmitCitySearch = () => {
+    getWeatherByCityName(value, setValue, setError, setFetching)
   }
 
   return (
@@ -64,4 +47,4 @@ const SearchInput = ({ addRow }) => {
   )
 }
 
-export default connect(null, { addRow })(SearchInput)
+export default connect(null, { getWeatherByCityName })(SearchInput)
